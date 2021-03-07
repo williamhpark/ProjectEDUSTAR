@@ -7,7 +7,9 @@ const SchoolInstancePage = (props) => {
   const [school, setSchool] = useState({});
 
   const getSchool = async () => {
-    const res = await axios.get(`/api/school/${props.match.params.id}`);
+    const res = await axios.get(
+      `/api/school/instance/${props.match.params.id}`
+    );
     setSchool(res.data);
   };
 
@@ -15,7 +17,12 @@ const SchoolInstancePage = (props) => {
     getSchool();
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <h1>{school.name}</h1>
+      <h3>{school.about}</h3>
+    </div>
+  );
 };
 
 export default SchoolInstancePage;

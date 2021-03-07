@@ -23,7 +23,7 @@ const HomePage = () => {
       <button onClick={() => history.push("/submit")}>Create</button>
       <ol>
         {schools.map((school) => {
-          return <Link to={`/school/${school._id}`}>{school.name}</Link>;
+          return <Link to={`/${school._id}`}>{school.name}</Link>;
         })}
       </ol>
     </div>

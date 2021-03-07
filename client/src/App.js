@@ -17,8 +17,8 @@ const App = () => {
           <Route exact path="/submit">
             <SubmissionsPage />
           </Route>
-          <Route exact path="school/:id">
-            <SchoolInstancePage />
+          <Route exact path="/:id">
+            {({ match }) => <SchoolInstancePage match={match} />}
           </Route>
           <Route exact path="/">
             <HomePage />
