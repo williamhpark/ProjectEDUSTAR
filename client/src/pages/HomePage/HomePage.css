@@ -9,6 +9,10 @@
   margin-bottom: 2rem;
 }
 
+.home-page-container h3:hover {
+  font-size: 125%;
+}
+
 .school-link {
   margin: 0.75rem 0;
 }

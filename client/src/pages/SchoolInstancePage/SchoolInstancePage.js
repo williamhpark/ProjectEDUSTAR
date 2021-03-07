@@ -23,13 +23,17 @@ const SchoolInstancePage = (props) => {
   return (
     <div className="instance-page-container">
       <h1>{school.name}</h1>
-      <p>{school.about}</p>
-      <p>
-        <b>Location:</b> {school.location}
-      </p>
-      <p>
-        <b>Admissions:</b> {school.admissions}
-      </p>
+      {school.about && <p>{school.about}</p>}
+      {school.location && (
+        <p>
+          <b>Location:</b> {school.location}
+        </p>
+      )}
+      {school.admissions && (
+        <p>
+          <b>Admissions:</b> {school.admissions}
+        </p>
+      )}
       <img className="school-image" src={school.image} alt="School image" />
       <button onClick={() => history.push(`/${props.match.params.id}/update`)}>
         Update

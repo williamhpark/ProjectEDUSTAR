@@ -2,16 +2,29 @@
   margin: 0;
 }
 
-button {
-  cursor: pointer;
-}
-
+button,
 input[type="submit"] {
   cursor: pointer;
+  background-color: #ff6347;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  color: white;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background-color: #f39d9c;
 }
 
 textArea {
   resize: vertical;
+}
+
+body button,
+input,
+textArea {
+  font-family: "Roboto", sans-serif;
 }
 
 .app {
@@ -23,9 +36,21 @@ textArea {
   color: black;
 }
 
-.logo {
-  font-size: 3rem;
+.logo-container {
   display: flex;
   justify-content: center;
   margin-bottom: 3rem;
+  align-items: center;
+}
+
+.logo-image {
+  height: 3rem;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 3rem;
+  font-family: "Dancing Script", cursive;
+  color: #003366;
+  margin-left: 2rem;
 }

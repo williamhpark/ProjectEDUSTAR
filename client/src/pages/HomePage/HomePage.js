@@ -21,17 +21,20 @@ const HomePage = () => {
   return (
     <div className="home-page-container">
       <button onClick={() => history.push("/submit")}>Create</button>
-      {schools.map((school) => {
-        return (
-          <Link
-            className="link school-link"
-            key={school._id}
-            to={`/${school._id}`}
-          >
-            <h3>{school.name}</h3>
-          </Link>
-        );
-      })}
+      {schools
+        .slice()
+        .reverse()
+        .map((school) => {
+          return (
+            <Link
+              className="link school-link"
+              key={school._id}
+              to={`/${school._id}`}
+            >
+              <h3>{school.name}</h3>
+            </Link>
+          );
+        })}
     </div>
   );
 };

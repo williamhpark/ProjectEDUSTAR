@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import "./App.css";
+import schoolImage from "./assets/images/school.png";
 import HomePage from "./pages/HomePage/HomePage";
 import SubmissionsPage from "./pages/SubmissionsPage/SubmissionsPage";
 import SchoolInstancePage from "./pages/SchoolInstancePage/SchoolInstancePage";
@@ -11,9 +12,12 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Link className="link logo" to="/">
-          Project Edustar
-        </Link>
+        <div className="logo-container">
+          <img className="logo-image" src={schoolImage} alt="Logo image" />
+          <Link className="link logo-text" to="/">
+            Project EDUSTAR
+          </Link>
+        </div>
         <Switch>
           <Route exact path="/submit">
             <SubmissionsPage />
