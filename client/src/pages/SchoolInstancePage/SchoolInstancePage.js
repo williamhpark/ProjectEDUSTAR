@@ -21,6 +21,7 @@ const SchoolInstancePage = (props) => {
     <div>
       <h1>{school.name}</h1>
       <h3>{school.about}</h3>
+      <img src={school.image} alt="School image" />
     </div>
   );
 };

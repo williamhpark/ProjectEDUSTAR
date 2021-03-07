@@ -1,22 +1,66 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const AWS = require("aws-sdk");
+const uuid = require("uuid");
 
 const School = require("../models/schoolModel");
 
+const storage = multer.memoryStorage({
+  destination: (req, file, callback) => {
+    callback(null, "");
+  },
+});
+const upload = multer({ storage }).single("file");
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ID,
+  secretAccessKey: process.env.AWS_SECRET,
+});
+
 // @route POST /school
 // @desc  Post school data from the submitted form to the database
-router.post("/instance", async (req, res) => {
+router.post("/instance", upload, async (req, res) => {
   try {
+    let image = "";
+
+    // Image upload
+    if (req.file === null) {
+      return res.status(400).json({ msg: "No file uploaded" });
+    } else {
+      let myFile = req.file.originalname.split(".");
+      const fileType = myFile[myFile.length - 1];
+
+      const fileKey = `${uuid.v4()}.${fileType}`;
+
+      // The image key matches the ID of the corresponding school instance in MongoDB
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: fileKey,
+        Body: req.file.buffer,
+      };
+
+      s3.upload(params, (error, data) => {
+        if (error) {
+          res.status(500).send(error);
+        }
+      });
+
+      image = `https://project-edustar-bucket.s3.ca-central-1.amazonaws.com/${fileKey}`;
+    }
+
     const { name, about, location, admissions } = req.body;
     const newSchool = new School({
       name,
       about,
       location,
       admissions,
+      image,
     });
     // Save the school to the database
     const savedSchool = await newSchool.save();
-    res.json(savedSchool);
+
+    res.status(200).json(savedSchool);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -24,29 +68,36 @@ router.post("/instance", async (req, res) => {
 
 // @route POST /image
 // @desc  Post the image from the submitted form to the database
-router.post("/image", async (req, res) => {
-  try {
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// router.post("/image", upload, async (req, res) => {
+//   let myFile = req.file.originalname.split(".");
+//   const fileType = myFile[myFile.length - 1];
+
+//   const params = {
+//     Bucket: process.env.AWS_BUCKET_NAME,
+//     Key: `${uuid.v4()}.${fileType}`,
+//     Body: req.file.buffer,
+//   };
+
+//   s3.upload(params, (error, data) => {
+//     if (error) {
+//       res.status(500).send(error);
+//     }
+//     res.status(200).send(data);
+//   });
+// });
 
 // @route GET /all
 // @desc  Get all school data in the database
 router.get("/all", async (req, res) => {
   const schools = await School.find();
-  res.json(schools);
+  res.status(200).json(schools);
 });
 
 // @route GET /instance
 // @desc  Get school data from a specific instance (based on ID) in the database
 router.get("/instance/:id", async (req, res) => {
   const school = await School.findById(req.params.id);
-  res.json(school);
+  res.status(200).json(school);
 });
-
-// @route GET /image
-// @desc  Get image
-router.get("/image:id", async (req, res) => {});
 
 module.exports = router;

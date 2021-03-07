@@ -5,6 +5,7 @@ const schoolSchema = new mongoose.Schema({
   about: { type: String, required: false },
   location: { type: String, required: false },
   admissions: { type: String, required: false },
+  image: { type: String, required: false },
 });
 
 const School = mongoose.model("schools", schoolSchema);
