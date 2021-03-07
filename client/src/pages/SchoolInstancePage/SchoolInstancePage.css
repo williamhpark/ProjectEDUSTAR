@@ -1,0 +1,19 @@
+.instance-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instance-page-container h1 {
+  margin-bottom: 1rem;
+}
+
+.instance-page-container p {
+  margin-top: 0.5rem;
+}
+
+.school-image {
+  width: 30rem;
+  height: auto;
+  margin: 2rem 0;
+}

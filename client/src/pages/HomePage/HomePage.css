@@ -1,0 +1,14 @@
+.home-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-page-container button {
+  width: 5rem;
+  margin-bottom: 2rem;
+}
+
+.school-link {
+  margin: 0.75rem 0;
+}

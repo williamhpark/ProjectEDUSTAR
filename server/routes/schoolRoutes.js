@@ -66,25 +66,46 @@ router.post("/instance", upload, async (req, res) => {
   }
 });
 
-// @route POST /image
-// @desc  Post the image from the submitted form to the database
-// router.post("/image", upload, async (req, res) => {
-//   let myFile = req.file.originalname.split(".");
-//   const fileType = myFile[myFile.length - 1];
+// @route PUT /instance
+// @desc  Update the school data for a certain instance in the database
+router.put("/instance/:id", upload, async (req, res) => {
+  try {
+    let image = "";
 
-//   const params = {
-//     Bucket: process.env.AWS_BUCKET_NAME,
-//     Key: `${uuid.v4()}.${fileType}`,
-//     Body: req.file.buffer,
-//   };
+    // Image upload
+    if (req.file === null) {
+      return res.status(400).json({ msg: "No file uploaded" });
+    } else {
+      let myFile = req.file.originalname.split(".");
+      const fileType = myFile[myFile.length - 1];
 
-//   s3.upload(params, (error, data) => {
-//     if (error) {
-//       res.status(500).send(error);
-//     }
-//     res.status(200).send(data);
-//   });
-// });
+      const fileKey = `${uuid.v4()}.${fileType}`;
+
+      // The image key matches the ID of the corresponding school instance in MongoDB
+      const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: fileKey,
+        Body: req.file.buffer,
+      };
+
+      s3.upload(params, (error, data) => {
+        if (error) {
+          res.status(500).send(error);
+        }
+      });
+
+      image = `https://project-edustar-bucket.s3.ca-central-1.amazonaws.com/${fileKey}`;
+    }
+
+    const { name, about, location, admissions } = req.body;
+    const updatedData = { name, about, location, admissions, image };
+    await School.findByIdAndUpdate({ _id: req.params.id }, updatedData);
+
+    res.status(200).json(updatedData);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // @route GET /all
 // @desc  Get all school data in the database
