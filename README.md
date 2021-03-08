@@ -20,5 +20,5 @@ The data is stored in MongoDB (Atlas), and images are stored in an AWS S3 bucket
 
 There are a few things I would do if I had more time to work on this project.  
 First, I would make the front end more aethetically pleasing and less plain.  
-Second, I would implement authentication (it would make sense if only the user who posts a school can update or delete it).
+Second, I would implement authentication (it would make sense if only the user who posts a school can update or delete it).  
 Third, I would make the site responsive on mobile devices using CSS Media Queries.
