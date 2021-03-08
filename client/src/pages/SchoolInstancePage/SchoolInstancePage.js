@@ -16,6 +16,11 @@ const SchoolInstancePage = (props) => {
     setSchool(res.data);
   };
 
+  const handleDelete = async () => {
+    await axios.delete(`/api/school/instance/${props.match.params.id}`);
+    history.push("/");
+  };
+
   useEffect(() => {
     getSchool();
   }, []);
@@ -35,9 +40,14 @@ const SchoolInstancePage = (props) => {
         </p>
       )}
       <img className="school-image" src={school.image} alt="School image" />
-      <button onClick={() => history.push(`/${props.match.params.id}/update`)}>
-        Update
-      </button>
+      <div className="button-container">
+        <button
+          onClick={() => history.push(`/${props.match.params.id}/update`)}
+        >
+          Update
+        </button>
+        <button onClick={() => handleDelete()}>Delete</button>
+      </div>
     </div>
   );
 };

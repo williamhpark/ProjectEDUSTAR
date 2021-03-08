@@ -121,4 +121,9 @@ router.get("/instance/:id", async (req, res) => {
   res.status(200).json(school);
 });
 
+router.delete("/instance/:id", async (req, res) => {
+  const deletedSchool = await School.findByIdAndDelete(req.params.id);
+  res.status(200).json(deletedSchool);
+});
+
 module.exports = router;
