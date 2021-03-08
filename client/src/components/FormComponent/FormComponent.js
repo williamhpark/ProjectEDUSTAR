@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./FormComponent.css";
 
@@ -32,7 +32,7 @@ const FormComponent = (props) => {
           id="school-name-input"
           name="school-name-input"
           type="text"
-          value={name}
+          defaultValue={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
@@ -43,7 +43,7 @@ const FormComponent = (props) => {
           type="textarea"
           rows={3}
           cols={50}
-          value={about}
+          defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
         />
         <label htmlFor="location-input">Location:</label>
@@ -53,7 +53,7 @@ const FormComponent = (props) => {
           type="textarea"
           rows={3}
           cols={50}
-          value={location}
+          defaultValue={location}
           onChange={(e) => setLocation(e.target.value)}
         />
         <label htmlFor="admissions-input">Admissions:</label>
@@ -63,7 +63,7 @@ const FormComponent = (props) => {
           type="textarea"
           rows={3}
           cols={50}
-          value={admissions}
+          defaultValue={admissions}
           onChange={(e) => setAdmissions(e.target.value)}
         />
         <input type="submit" value="Submit" />

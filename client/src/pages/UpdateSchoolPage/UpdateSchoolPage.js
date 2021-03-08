@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -32,6 +32,22 @@ const UpdateSchoolPage = (props) => {
     // Redirect user to home page
     history.push("/");
   };
+
+  // Populate the input fields with the previous values, which will be edited
+  const initializeSchoolData = async () => {
+    await axios
+      .get(`/api/school/instance/${props.match.params.id}`)
+      .then((response) => {
+        setNameModified(response.data.name);
+        setAboutModified(response.data.about);
+        setLocationModified(response.data.location);
+        setAdmissionsModified(response.data.admissions);
+      });
+  };
+
+  useEffect(() => {
+    initializeSchoolData();
+  }, []);
 
   const passedProps = {
     name: nameModified,
