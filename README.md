@@ -1,6 +1,7 @@
 # Project EDUSTAR
 
-My submission for the Dreamschools case exercise, as a candidate for the fullstack developer position.
+My submission for the Dreamschools case exercise, as a candidate for the fullstack developer position.  
+**URL:** https://project-edustar.herokuapp.com/
 
 ## Stack
 
