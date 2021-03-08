@@ -12,12 +12,12 @@ I used React to create the interactive UI, React Hooks to manage the components'
 
 ### Back end
 
-I set up an internal API using Node.js and Express.js to retreive, upload, and update data from the database.
+I set up an internal API using Node.js and Express.js to retreive, upload, and update data from the database.  
 The data is stored in MongoDB (Atlas), and images are stored in an AWS S3 bucket.
 
 ## Possible improvements
 
 There are a few things I would do if I had more time to work on this project.  
-First, I would make the front end more aethetically pleasing and less plain.
-Second, I would implement authentication (it would make sense if only the user who posts a school can update or delete it).
+First, I would make the front end more aethetically pleasing and less plain.  
+Second, I would implement authentication (it would make sense if only the user who posts a school can update or delete it).  
 Third, I would add a DELETE endpoint in the internal API to delete a school instance.
